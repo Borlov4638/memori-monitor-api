@@ -19,7 +19,7 @@ $ cp .env.example .env
 ## Запускаем контейнеры с flask-сервером и mongodb
 
 ```bash
-$ docker-compose up -d
+$ docker compose up -d
 ```
 
 # Запуск скрипта для отслеживания потребления памяти
