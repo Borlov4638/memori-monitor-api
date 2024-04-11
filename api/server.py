@@ -47,10 +47,13 @@ def update_data(data_id):
     if not updated_data:
         return jsonify({'error': 'No data provided'}), 400
     # Обновляем данные в коллекции
-    result = collection.update_one({'_id': ObjectId(data_id)}, {'$set': updated_data})
-    if result.modified_count == 0:
-        return jsonify({'error': 'Data not found or no changes were made'}), 404
-    return jsonify({'message': 'Data updated successfully'}), 200
+    try:
+        result = collection.update_one({'_id': ObjectId(data_id)}, {'$set': updated_data})
+        if result.modified_count == 0:
+            return jsonify({'error': 'Data not found or no changes were made'}), 404
+        return jsonify({'message': 'Data updated successfully'}), 200
+    except:
+        return jsonify({'error': 'Invalid ID'}), 400
 
 if __name__ == '__main__':
     app.run(port=int(os.getenv('FLASK_PORT', 8080)), host='0.0.0.0')
